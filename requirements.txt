@@ -1,0 +1,10 @@
+flask
+pandas
+gunicorn
+numpy
+torch
+transformers
+matplotlib
+sklearn
+random
+time

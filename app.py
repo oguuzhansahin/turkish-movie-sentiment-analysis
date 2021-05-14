@@ -2,11 +2,9 @@ from flask import Flask,render_template,url_for,request
 import torch
 import numpy as np
 import torch.nn.functional as F
-
-from utils import predict,device
 from transformers import BertTokenizerFast
 
-
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 MAX_LEN = 25
 tokenizer = BertTokenizerFast.from_pretrained("savasy/bert-base-turkish-sentiment-cased")
 model = torch.load("model/bert_classifier.pth")

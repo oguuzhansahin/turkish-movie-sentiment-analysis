@@ -1,5 +1,5 @@
 flask
 gunicorn
 numpy
-torch
+torch == 1.7.0
 transformers

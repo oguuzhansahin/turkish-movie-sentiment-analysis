@@ -9,13 +9,29 @@ import torch.nn.functional as F
 
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from transformers import AutoModel, BertTokenizerFast
-from torch.utils.data import DataLoader, TensorDataset, RandomSampler, SequentialSampler
-from utils import TurkishSentimentBERT
-from utils import initialize_model
-from utils import train,evaluate,set_seed
-from utils import predict_test, evaluate_roc,device,predict
-#%%
+
+from transformers import (
+  AutoModel, 
+  BertTokenizerFast
+)
+
+from torch.utils.data import (
+  DataLoader, 
+  TensorDataset, 
+  RandomSampler, 
+  SequentialSampler
+)
+from utils import (
+  TurkishSentimentBERT,
+  initialize_model,
+  train,
+  evaluate,
+  set_seed,
+  predict_test,
+  evaluate_roc,
+  device,
+  predict
+)
 
 CSV_NAME = "turkish_movie_sentiment_dataset.csv"
 PRE_TRAINED_MODEL = 'savasy/bert-base-turkish-sentiment-cased'
@@ -23,9 +39,8 @@ MAX_LEN = 25
 BATCH_SIZE = 64
 EPOCHS = 1
 
-#%%
-df = pd.read_csv(CSV_NAME)
 
+df = pd.read_csv(CSV_NAME)
 df['point'] = df['point'].apply(lambda x:float(x[0:-2])) # point sütunundaki değerler 5,5 şeklindeydi bunları floata dönüştürdüm.
 df['comment'] = df['comment'].apply(lambda x: x.strip()) # commentlerin başında /n ve fazladan boşluklar vardı, bunları kaldırdım.
 df = df.drop(df[df.point==3].index,axis=0) # 3 puan verilen yorumlar nötr yorumlar olduğu için bunları verisetinden çıkarıyorum.
